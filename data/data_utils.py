@@ -1,6 +1,8 @@
 import tensorflow as tf
 
+
 def load_image(path):
+    print(path)
     image = tf.io.read_file(path)
     image = tf.image.decode_jpeg(image, channels=3)
     image = tf.image.resize(image, [100, 100])

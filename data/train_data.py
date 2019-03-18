@@ -1,12 +1,12 @@
 import tensorflow as tf
 import pathlib
 import random
-import data_utils
+from . import data_utils
 
 # mysterious autotune parameter
 AUTOTUNE = tf.data.experimental.AUTOTUNE
 
-train_root = pathlib.Path('./data/Training')
+train_root = pathlib.Path('../data/Training')
 train_root = train_root.resolve()
 
 print(f'Training data root is {train_root.absolute()}')
@@ -44,10 +44,13 @@ def create_zipped_set():
     return zipped, image_count
 
 
-def create_train_set():
+def create_train_set(BATCH_SIZE):
     (data, count) = create_zipped_set()
     ds = data.apply(
         tf.data.experimental.shuffle_and_repeat(buffer_size=count))
     ds = ds.batch(BATCH_SIZE)
     ds = ds.prefetch(buffer_size=AUTOTUNE)
     return ds
+
+def get_train_count():
+    return len(list(train_root.glob('*/*')))
