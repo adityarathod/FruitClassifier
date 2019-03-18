@@ -1,5 +1,6 @@
 # Data directory
-data/*
+data/Test
+data/Training
 
 # User-specific stuff
 .idea/**/workspace.xml
