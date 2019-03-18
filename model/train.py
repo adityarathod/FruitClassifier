@@ -14,4 +14,7 @@ epoch_steps = tf.math.ceil(count / batch_size).numpy()
 
 model = model.create_model()
 
-model.fit(dataset, epochs=200, steps_per_epoch=epoch_steps)
+# Create TensorBoard callback
+tensorboard_cbk = tf.keras.callbacks.TensorBoard(log_dir='../logs')
+
+model.fit(dataset, epochs=200, steps_per_epoch=epoch_steps, callbacks=[tensorboard_cbk])
